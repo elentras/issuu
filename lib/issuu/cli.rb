@@ -1,3 +1,4 @@
+require 'digest/md5'
 module Issuu
   class Cli
     class << self
@@ -17,8 +18,8 @@ module Issuu
         }
       end
       
-      def upload(file, file_type, params={})
-        file_to_upload = UploadIO.new(file, file_type)
+      def upload(file_path, file_type, params={})
+        file_to_upload = UploadIO.new(file_path, file_type)
         url = URI.parse('http://upload.issuu.com/1_0?')
         upload_params = default_upload_params.update(params)
 
@@ -34,7 +35,7 @@ module Issuu
         end
       end
       
-      def list(params)
+      def list(params={})
         url = URI.parse('http://api.issuu.com/1_0?')
         list_params = {
           :action => "issuu.documents.list",
@@ -44,7 +45,7 @@ module Issuu
           :format => "json",
           :names => "filename"
         }
-        request = Net::HTTP.get_print(url, list_params.merge({:signature => generate_signature(upload_params)}))
+        request = Net::HTTP.get_print(url, list_params.merge({:signature => generate_signature(list_params)}))
         json_data = ActiveSupport::JSON.decode(request.body)
         check_for_exceptions(json_data)
         documentId = json_data['rsp']['_content']
@@ -56,10 +57,10 @@ module Issuu
           :action => "issuu.document.delete",
           :apiKey => Issuu.api_key,
           :format => "json",
-          :names => "filename"
+          :names => filename
         }
         
-        request = Net::HTTP.post_form(url, delete_params.merge({:signature => generate_signature(upload_params)}))
+        request = Net::HTTP.post_form(url, delete_params.merge({:signature => generate_signature(delete_params)}))
         json_data = ActiveSupport::JSON.decode(request.body)
         check_for_exceptions(json_data)
       end
