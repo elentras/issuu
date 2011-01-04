@@ -1,5 +1,5 @@
-require 'multipart-post'
-require 'activesupport'
+require 'net/http/post/multipart'
+require 'active_support'
 
 module Issuu
   

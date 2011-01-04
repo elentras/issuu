@@ -23,8 +23,8 @@ Jeweler::Tasks.new do |gem|
   # and development dependencies are only needed for development (ie running rake tasks, tests, etc)
   #  gem.add_runtime_dependency 'jabber4r', '> 0.1'
   #  gem.add_development_dependency 'rspec', '> 1.2.3'
-  gemspec.add_dependency "activesupport", '>= 3.0.3'
-  gemspec.add_dependency "multipart-post"
+  gem.add_dependency "activesupport", '>= 3.0.3'
+  gem.add_dependency "multipart-post"
 end
 Jeweler::RubygemsDotOrgTasks.new
 

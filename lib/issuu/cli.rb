@@ -40,7 +40,7 @@ module Issuu
           :action => "issuu.documents.list",
           :apiKey => Issuu.api_key,
           :access => "public",
-          :responseParams => "title,description"
+          :responseParams => "title,description",
           :format => "json",
           :names => "filename"
         }
