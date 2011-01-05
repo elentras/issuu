@@ -1,4 +1,8 @@
+require "net/http"
 require 'net/http/post/multipart'
+require 'digest/md5'
+require 'uri'
+require 'cgi'
 require 'active_support'
 
 module Issuu
