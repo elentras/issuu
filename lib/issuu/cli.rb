@@ -9,10 +9,9 @@ module Issuu
           #:downloadable     => true,
           :commentsAllowed  => false,
           :ratingsAllowed   => false,
-          :title            => "test",
           :apiKey           => Issuu.api_key,
           :format           => "json",
-          :name             => "test"
+          #:name             => "test"
         }
       end
       
