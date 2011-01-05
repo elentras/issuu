@@ -66,7 +66,7 @@ module Issuu
       end
       
       def generate_signature(params)
-        string_to_sign = "#{Issuu.api_key}#{params.sort_by {|k| k.to_s }.to_s}"
+        string_to_sign = "#{Issuu.secret}#{params.sort_by {|k| k.to_s }.to_s}"
         Digest::MD5.hexdigest(string_to_sign)
       end
       
