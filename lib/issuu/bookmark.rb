@@ -3,46 +3,31 @@ module Issuu
     class << self
     
       def add(name, document_user_name, params={})
-        url_upload_params = {
-          :action => "issuu.bookmark.add",
-          :apiKey => Issuu.api_key,
-          :format => "json",
-          :name => name,
-          :documentUsername => document_user_name
-        }
-        Cli.http_post(Issuu::API_URL, url_upload_params.merge(params))
+        Cli.http_post(
+          Issuu::API_URL,
+          ParameterSet.new("issuu.bookmark.add", params.merge({:name => name, :documentUsername => document_user_name})).output
+        )
       end
       
-      def list(params={})
-        list_params = {
-          :action => "issuu.bookmarks.list",
-          :apiKey => Issuu.api_key,
-          :format => "json"
-        }
-        
-        Cli.http_get(Issuu::API_URL, list_params.merge(params))
+      def list(params={})        
+        Cli.http_get(
+          Issuu::API_URL,
+          ParameterSet.new("issuu.bookmarks.list", params).output
+        )
       end
       
-      def update(bookmark_id, params={})
-        update_params = {
-          :action => "issuu.bookmark.update",
-          :apiKey => Issuu.api_key,
-          :format => "json",
-          :bookmarkId => bookmark_id
-        }
-        
-        Cli.http_post(Issuu::API_URL, update_params.merge(params))
+      def update(bookmark_id, params={})        
+        Cli.http_post(
+          Issuu::API_URL,
+          ParameterSet.new("issuu.bookmark.update", params.merge({:bookmarkId => bookmark_id})).output
+        )
       end
       
-      def delete(bookmark_ids)
-        delete_params = {
-          :action => "issuu.bookmark.delete",
-          :apiKey => Issuu.api_key,
-          :format => "json",
-          :names => bookmark_ids.join(',')
-        }
-        
-        Cli.http_post(Issuu::API_URL, url_upload_params)
+      def delete(bookmark_ids)        
+        Cli.http_post(
+          Issuu::API_URL,
+          ParameterSet.new("issuu.bookmark.delete", params.merge({:bookmarkIds => bookmark_ids.join(',')})).output
+        )
       end
     
     end
