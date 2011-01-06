@@ -19,7 +19,7 @@ Full Issuu API reference: http://issuu.com/services/api/
   end
 
   puts Issuu::Document.list.inspect
-  response = Issuu::Document.upload('/Users/Bastien/Documents/certificate.pdf', 'application/pdf')
+  response = Issuu::Document.upload('path_to_your_file', 'application/pdf')
   name = response["rsp"]["_content"]["document"]["name"]
   puts "File uploaded: #{name}"
   puts Issuu::Document.list.inspect
