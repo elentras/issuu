@@ -24,3 +24,6 @@ module Issuu
 end
 
 require 'issuu/cli'
+require 'issuu/document'
+require 'issuu/bookmark'
+require 'issuu/folder'
