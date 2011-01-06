@@ -3,11 +3,11 @@ module Issuu
     def initialize(action, extra_params={})
       @api_key = extra_params.delete(:api_key) || Issuu.api_key
       @secret = extra_params.delete(:secret) || Issuu.secret
-      @params = extra_params.update {
+      @params = extra_params.update({
         :action => action,
-        :apiKey => @api_key 
+        :apiKey => @api_key,
         :format => "json"
-      }
+      })
     end
     
     def generate_signature

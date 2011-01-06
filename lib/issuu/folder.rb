@@ -27,7 +27,6 @@ module Issuu
         Cli.http_post(
           Issuu::API_URL,
           ParameterSet.new("issuu.folder.delete", params.merge(:names => folder_ids.join(','))).output
-          delete_params
         )
       end
     
