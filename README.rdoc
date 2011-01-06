@@ -3,30 +3,28 @@
 Access to the Issuu API based on {Guillem Català post}[http://planet.ubiquo.me/using-the-issuucom-api-to-upload-and-delete-p]
 Full Issuu API reference: http://issuu.com/services/api/
 
-<code>
-gem install issuu
-</code>
+== Installation
+
+  gem install issuu
 
 == Example of use
 
-<code>
-require 'rubygems'
-require 'issuu'
+  require 'rubygems'
+  require 'issuu'
 
-# if you're using rails, put this in an initializer file
-Issuu.configure do |c|
-  c.api_key   = "YOUR ISSUU API KEY"
-  c.secret    = "YOUR ISSUU SECRET"
-end
+  # if you're using rails, put this in an initializer file
+  Issuu.configure do |c|
+    c.api_key   = "YOUR ISSUU API KEY"
+    c.secret    = "YOUR ISSUU SECRET"
+  end
 
-puts Issuu::Document.list.inspect
-response = Issuu::Document.upload('/Users/Bastien/Documents/certificate.pdf', 'application/pdf')
-name = response["rsp"]["_content"]["document"]["name"]
-puts "File uploaded: #{name}"
-puts Issuu::Document.list.inspect
-Issuu::Document.delete([name])
-puts Issuu::Document.list.inspect
-</code>
+  puts Issuu::Document.list.inspect
+  response = Issuu::Document.upload('/Users/Bastien/Documents/certificate.pdf', 'application/pdf')
+  name = response["rsp"]["_content"]["document"]["name"]
+  puts "File uploaded: #{name}"
+  puts Issuu::Document.list.inspect
+  Issuu::Document.delete([name])
+  puts Issuu::Document.list.inspect
 
 == Contributing to issuu
  
