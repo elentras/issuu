@@ -31,10 +31,10 @@ module Issuu
         decoded_response_body(request.body)
       end
       
-      def http_multipart_post(url, params)
+      def http_multipart_post(url, file, params)
         petition = Net::HTTP::Post::Multipart.new(
           url.path,
-          params.merge({:signature => Cli.generate_signature(upload_params)})
+          params.merge({:signature => Cli.generate_signature(params), :file => file})
         )
         Net::HTTP.start(url.host, url.port) do |http|
           request = http.request(petition)

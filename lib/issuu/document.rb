@@ -1,20 +1,6 @@
 module Issuu
   class Document
-    class << self
-      def default_upload_params
-        {
-          :access           => "private",
-          :action           => "issuu.document.upload",
-          #:description      =>  "",
-          #:downloadable     => true,
-          :commentsAllowed  => false,
-          :ratingsAllowed   => false,
-          :apiKey           => Issuu.api_key,
-          :format           => "json",
-          #:name             => "test"
-        }
-      end
-      
+    class << self      
       def url_upload(url, params={})
         url = URI.parse('http://api.issuu.com/1_0?')
         url_upload_params = {
@@ -27,11 +13,15 @@ module Issuu
       end
       
       def upload(file_path, file_type, params={})
-        file_to_upload = UploadIO.new(file_path, file_type)
         url = URI.parse('http://upload.issuu.com/1_0?')
-        upload_params = default_upload_params.update(params)
+        file_to_upload = UploadIO.new(file_path, file_type)
+        upload_params = {
+          :action           => "issuu.document.upload",
+          :apiKey           => Issuu.api_key,
+          :format           => "json",
+        }
         
-        Cli.http_multipart_post(url, upload_params.merge({:file => file_to_upload}))
+        Cli.http_multipart_post(url, file_to_upload, upload_params.merge(params))
       end
       
       def update(filename, params={})
