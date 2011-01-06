@@ -1,7 +1,6 @@
 module Issuu
   class Cli
     class << self
-            
       def check_for_exceptions(json_data)
         if json_data['rsp']['stat'].eql?("fail")
           raise(StandardError, json_data['rsp']["_content"]["error"]["message"])
@@ -35,7 +34,6 @@ module Issuu
           decoded_response_body(request.body)
         end
       end
-      
     end
   end
 end
