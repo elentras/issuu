@@ -1,9 +1,16 @@
 module Issuu
   class Bookmark
-    attr_accessor :hash
-    
     def initialize(hash)
-      @hash = hash
+      hash.each do |key, value|
+        metaclass.send :attr_accessor, key
+        instance_variable_set("@#{key}", value)
+      end
+    end
+    
+    def metaclass
+      class << self
+        self
+      end
     end
     
     class << self
