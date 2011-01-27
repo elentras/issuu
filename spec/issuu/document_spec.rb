@@ -176,4 +176,19 @@ describe Issuu::Document do
       subject.title.should == "Race cars"
     end
   end
+  
+  describe "signing a request" do
+
+    subject { Issuu::ParameterSet.new 'issuu.documents.list',
+      :api_key => 'qyy6ls1qv15uh9xwwlvk853u2uvpfka7',
+      :secret => '13e3an36eaxjy8nenuepab05yc7j7w5g',
+      :access => 'public',
+      :responseParams => 'title,description' }
+
+    it "should generate a correct signature" do
+      p "Subject: #{subject.inspect}"
+      subject.generate_signature.should == '7431d31140cf412ab5caa73586d6324a'
+    end
+  end
+  
 end
