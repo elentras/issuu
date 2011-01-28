@@ -186,7 +186,6 @@ describe Issuu::Document do
       :responseParams => 'title,description' }
 
     it "should generate a correct signature" do
-      p "Subject: #{subject.inspect}"
       subject.generate_signature.should == '7431d31140cf412ab5caa73586d6324a'
     end
   end
